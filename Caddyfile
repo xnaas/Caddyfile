@@ -1,0 +1,230 @@
+{
+  default_sni xnaas.info
+  acme_ca https://acme-v02.api.letsencrypt.org/directory
+  email {$ACMEEMAIL}
+}
+(proxyheaders) {
+  flush_interval -1
+  header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+  header_up X-Forwarded-For {http.request.header.CF-Connecting-IP}
+  header_up X-Forwarded-Host {hostport}
+}
+(main) {
+  tls {
+    on_demand
+    dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    client_auth {
+      mode require_and_verify
+      trusted_ca_cert_file /data/origin-pull-ca.pem
+    }
+  }
+  header {
+    Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    Content-Security-Policy "upgrade-insecure-requests"
+    X-Frame-Options "SAMEORIGIN"
+    X-Content-Type-Options "nosniff"
+    X-XSS-Protection "1; mode=block"
+    Referrer-Policy "strict-origin-when-cross-origin"
+  }
+  log {
+    output file /data/logs/access.log {
+      roll_size 10MiB
+      roll_keep 10
+      roll_keep_for 168h
+    }
+    format json
+    level ERROR
+  }
+}
+(asak) {
+  basicauth {
+    {$ASAK}
+  }
+}
+(xadmin) {
+  basicauth {
+    {$XADMIN}
+  }
+}
+(errors) {
+  handle_errors {
+    rewrite * /{http.error.status_code}
+    reverse_proxy https://http.cat {
+      header_up Host http.cat
+    }
+  }
+}
+https://xnaas.info {
+  import main
+  import errors
+  root * /www/websites/xnaas.info
+  file_server
+  redir /chatlog /chatlog/
+  handle_path /chatlog/* {
+    root * /www/shared/chatlog
+    file_server browse
+  }
+  redir /tmp /tmp/
+  handle_path /tmp/* {
+    root * /www/tmp
+    file_server
+  }
+  handle_path /pgp* {
+    redir https://github.com/xnaas/pgp 302
+  }
+}
+https://dl.xnaas.info {
+  import main
+  redir https://dl.actionsack.com{uri} permanent
+}
+https://home.xnaas.info {
+  import main
+  reverse_proxy https://192.168.1.150:5001 {
+    transport http {
+      tls
+      tls_insecure_skip_verify
+    }
+    import proxyheaders
+  }
+}
+https://irc.xnaas.info {
+  import main
+  reverse_proxy thelounge:9000 {
+    import proxyheaders
+  }
+}
+https://kb.xnaas.info {
+  import main
+  reverse_proxy wikijs:3000 {
+    import proxyheaders
+  }
+}
+https://music.xnaas.info {
+  import main
+  reverse_proxy music:4533 {
+    import proxyheaders
+  }
+}
+https://ombi.xnaas.info {
+  import main
+  reverse_proxy ombi:3579 {
+    import proxyheaders
+  }
+}
+https://p.xnaas.info {
+  import main
+  import errors
+  root * /www/p.xnaas.info
+  redir /favicon.ico https://xnaas.info/favicon.ico
+  file_server browse
+}
+https://plex.xnaas.info {
+  import main
+  reverse_proxy https://192.168.1.101:32400 {
+    import proxyheaders
+    transport http {
+      tls
+      tls_insecure_skip_verify
+    }
+  }
+}
+https://plexpy.xnaas.info {
+  import main
+  reverse_proxy plexpy:8181 {
+    import proxyheaders
+  }
+}
+https://rss.xnaas.info {
+  import main
+  reverse_proxy rss:80 {
+    import proxyheaders
+  }
+}
+https://rssb.xnaas.info {
+  import main
+  import asak
+  reverse_proxy rss-bridge:80 {
+    import proxyheaders
+  }
+}
+https://tesla.xnaas.info {
+  import main
+  import xadmin
+  reverse_proxy teslamate:4000 {
+    import proxyheaders
+  }
+}
+https://teslag.xnaas.info {
+  import main
+  reverse_proxy teslamate-grafana:3000 {
+    import proxyheaders
+  }
+}
+https://www.xnaas.info {
+  import main
+  redir https://dropwww.com/why permanent
+}
+https://ytdl.xnaas.info {
+  import main
+  redir https://ytdl.actionsack.com permanent
+}
+https://xn--jq9h.xnaas.info {
+  import main
+  import errors
+  root * /www/websites/🤪.xnaas.info
+  redir /favicon.ico https://xnaas.info/favicon.ico
+  file_server
+}
+https://xn--bdk.xnaas.info {
+  import main
+  import errors
+  root * /www/websites/ツ.xnaas.info
+  redir /favicon.ico https://xnaas.info/favicon.ico
+  file_server
+}
+https://xn--kq9h.xnaas.info {
+  import main
+  import errors
+  root * /www/websites/🤫.xnaas.info
+  redir /favicon.ico https://xnaas.info/favicon.ico
+  file_server
+}
+https://actionsack.com {
+  import main
+  import errors
+  root * /www/websites/actionsack.com
+  file_server browse {
+    hide hidden
+  }
+}
+https://chat.actionsack.com {
+  import main
+  import errors
+  root * /www/websites/actionsack.com
+  file_server
+}
+https://dl.actionsack.com {
+  import main
+  import asak
+  root * /www/download
+  redir /favicon.ico https://actionsack.com/favicon.ico
+  file_server browse {
+    hide *.tmp
+  }
+}
+https://nitter.actionsack.com {
+  import main
+  reverse_proxy nitter:8080 {
+    import proxyheaders
+  }
+}
+https://www.actionsack.com {
+  import main
+  redir https://dropwww.com/why permanent
+}
+https://ytdl.actionsack.com {
+  import main
+  reverse_proxy youtubedl:8080 {
+    import proxyheaders
+  }
+}
