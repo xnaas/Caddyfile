@@ -79,11 +79,7 @@ https://dl.xnaas.info {
 }
 https://home.xnaas.info {
   import main
-  reverse_proxy https://192.168.1.150:5001 {
-    transport http {
-      tls
-      tls_insecure_skip_verify
-    }
+  reverse_proxy http://192.168.1.150:5000 {
     import proxyheaders
   }
 }
@@ -120,12 +116,8 @@ https://p.xnaas.info {
 }
 https://plex.xnaas.info {
   import main
-  reverse_proxy https://192.168.1.101:32400 {
+  reverse_proxy http://192.168.1.101:32400 {
     import proxyheaders
-    transport http {
-      tls
-      tls_insecure_skip_verify
-    }
   }
 }
 https://plexpy.xnaas.info {
