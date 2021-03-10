@@ -59,11 +59,6 @@ https://xnaas.info {
   import errors
   root * /www/websites/xnaas.info
   file_server
-  redir /chatlog /chatlog/
-  handle_path /chatlog/* {
-    root * /www/shared/chatlog
-    file_server browse
-  }
   redir /tmp /tmp/
   handle_path /tmp/* {
     root * /www/tmp
