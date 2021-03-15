@@ -14,13 +14,13 @@ See also: [caddyserver docker container](https://github.com/xnaas/caddy)
 }
 ```
 
-### default_sni xnaas.info
+### `default_sni xnaas.info`
 Because multiple domains are hosted on the same machine, [SNI](https://en.wikipedia.org/wiki/Server_Name_Indication) is somewhat important. I chose my personal domain as the primary domain.
 
-### acme_ca https://acme-v02.api.letsencrypt.org/directory
+### `acme_ca https://acme-v02.api.letsencrypt.org/directory`
 I simply manually set Let's Encrypt's ACME v2 server in case the default is ever changed in the future.
 
-### email {$ACMEEMAIL}
+### `email {$ACMEEMAIL}`
 This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable.
 
 ## Snippets
@@ -80,10 +80,10 @@ This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable
 }
 ```
 
-### (proxyheaders)
+### `(proxyheaders)`
 This snippet makes sure that certain headers are passed through correctly to proxied applications for IP logging.
 
-### (main)
+### `(main)`
 #### tls
 This snippet section simply sets the ACME auth to DNS mode using Cloudflare as the provider and requires [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls).
 
@@ -93,10 +93,10 @@ This snippet section simply sets some key headers.
 #### log
 This defines logging in a certain way so that I can parse the output with fail2ban.
 
-### (asak) | (xadmin)
+### `(asak)` | `(xadmin)`
 These snippets define [basicauth](https://caddyserver.com/docs/caddyfile/directives/basicauth) for a certain logins.
 
-### (errors)
+### `(errors)`
 This snippet defines custom error images for different HTTP error codes using the kindly provided [http.cat](https://http.cat) service.
 
 ## Addresses / Site Blocks
