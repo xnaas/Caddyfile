@@ -81,7 +81,9 @@ This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable
 ```
 
 ### `(proxyheaders)`
-This snippet makes sure that certain headers are passed through correctly to proxied applications for IP logging.
+This snippet sets `flush_interval -1` for proxied applicaitons to disable buffering. See: [Streaming @ Caddy docs](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#streaming).
+
+This snippet also makes sure that certain headers are passed through correctly to proxied applications for IP logging.
 
 ### `(main)`
 #### tls
