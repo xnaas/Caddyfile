@@ -14,13 +14,13 @@ See also: [caddyserver docker container](https://github.com/xnaas/caddy)
 }
 ```
 
-### `default_sni xnaas.info`
+### default_sni xnaas.info
 Because multiple domains are hosted on the same machine, [SNI](https://en.wikipedia.org/wiki/Server_Name_Indication) is somewhat important. I chose my personal domain as the primary domain.
 
-### `acme_ca https://acme-v02.api.letsencrypt.org/directory`
+### acme_ca https://acme-v02.api.letsencrypt.org/directory
 I simply manually set Let's Encrypt's ACME v2 server in case the default is ever changed in the future.
 
-### `email {$ACMEEMAIL}`
+### email {$ACMEEMAIL}
 This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable.
 
 ## Snippets
