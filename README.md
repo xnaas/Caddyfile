@@ -1,7 +1,7 @@
 # Caddyfile
-This is my Caddyfile. There are many like it, but this one is mine.
+[This is my Caddyfile](https://github.com/xnaas/Caddyfile/blob/master/Caddyfile). There are many like it, but this one is mine.
 
-See also: [caddyserver docker container](https://github.com/xnaas/caddy)
+See also: [my Caddy Docker container](https://github.com/xnaas/caddy)
 
 ## Global Settings
 [Global Options @ Caddy docs](https://caddyserver.com/docs/caddyfile/options#global-options)
