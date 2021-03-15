@@ -82,6 +82,10 @@ https://irc.xnaas.info {
   import main
   reverse_proxy thelounge:9000 {
     import proxyheaders
+    transport http {
+      keepalive 1d
+      keepalive_idle_conns 3
+    }
   }
 }
 https://kb.xnaas.info {
