@@ -18,6 +18,9 @@
       trusted_ca_cert_file /data/origin-pull-ca.pem
     }
   }
+  request_body * {
+    max_size 100MB
+  }
   header {
     Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
     Content-Security-Policy "upgrade-insecure-requests"
