@@ -187,6 +187,11 @@ https://actionsack.com {
   file_server browse {
     hide hidden
   }
+  redir /tmp /tmp/
+  handle_path /tmp/* {
+    root * /www/tmp
+    file_server
+  }
 }
 https://chat.actionsack.com {
   import main
