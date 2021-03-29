@@ -205,7 +205,7 @@ https://dl.actionsack.com {
   root * /www/download
   redir /favicon.ico https://actionsack.com/favicon.ico
   file_server browse {
-    hide *.tmp
+    hide .*
   }
 }
 https://nitter.actionsack.com {
