@@ -84,7 +84,7 @@ https://irc.xnaas.info {
     import proxyheaders
     transport http {
       keepalive 1d
-      keepalive_idle_conns 3
+      keepalive_idle_conns 5
     }
   }
 }
