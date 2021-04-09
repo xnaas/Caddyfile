@@ -192,6 +192,12 @@ https://actionsack.com {
     file_server
   }
 }
+https://bib.actionsack.com {
+  import main
+  reverse_proxy bibliogram:10407 {
+    import proxyheaders
+  }
+}
 https://chat.actionsack.com {
   import main
   import errors
