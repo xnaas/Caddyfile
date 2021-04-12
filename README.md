@@ -35,7 +35,6 @@ This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable
 }
 (main) {
   tls {
-    on_demand
     dns cloudflare {env.CLOUDFLARE_API_TOKEN}
     client_auth {
       mode require_and_verify
