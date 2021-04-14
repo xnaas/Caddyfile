@@ -108,7 +108,7 @@ https://ombi.xnaas.info {
 https://p.xnaas.info {
   import main
   import errors
-  root * /www/p.xnaas.info
+  root * /www/websites/p.xnaas.info
   redir /favicon.ico https://xnaas.info/favicon.ico
   file_server browse
 }
