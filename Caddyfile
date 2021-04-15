@@ -67,10 +67,6 @@ https://xnaas.info {
     redir https://github.com/xnaas/pgp 302
   }
 }
-https://dl.xnaas.info {
-  import main
-  redir https://dl.actionsack.com{uri} permanent
-}
 https://home.xnaas.info {
   import main
   reverse_proxy http://192.168.1.150:5000 {
@@ -154,10 +150,6 @@ https://www.xnaas.info,
 https://www.actionsack.com {
   import main
   redir https://dropwww.com/why permanent
-}
-https://ytdl.xnaas.info {
-  import main
-  redir https://ytdl.actionsack.com permanent
 }
 https://xn--jq9h.xnaas.info {
   import main
