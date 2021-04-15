@@ -10,6 +10,7 @@ See also: [my Caddy Docker container](https://github.com/xnaas/caddy)
 {
   default_sni xnaas.info
   acme_ca https://acme-v02.api.letsencrypt.org/directory
+  acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
   email {$ACMEEMAIL}
 }
 ```
@@ -19,6 +20,9 @@ Because multiple domains are hosted on the same machine, [SNI](https://en.wikipe
 
 ### `acme_ca https://acme-v02.api.letsencrypt.org/directory`
 I simply manually set Let's Encrypt's ACME v2 server in case the default is ever changed in the future.
+
+### `acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}`
+This globally sets the ACME challenges to a specific DNS provider.
 
 ### `email {$ACMEEMAIL}`
 This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable.
@@ -35,7 +39,6 @@ This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable
 }
 (main) {
   tls {
-    dns cloudflare {env.CLOUDFLARE_API_TOKEN}
     client_auth {
       mode require_and_verify
       trusted_ca_cert_file /data/origin-pull-ca.pem
@@ -86,7 +89,7 @@ This snippet also makes sure that certain headers are passed through correctly t
 
 ### `(main)`
 #### tls
-This snippet section simply sets the ACME auth to DNS mode using Cloudflare as the provider and requires [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls).
+This snippet section forces [Authenticated Origin Pulls](https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls).
 
 #### header
 This snippet section simply sets some key headers.
