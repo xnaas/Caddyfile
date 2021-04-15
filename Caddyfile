@@ -67,9 +67,6 @@ https://xnaas.info {
     redir https://github.com/xnaas/pgp 302
   }
 }
-http://192.168.1.101 {
-  
-}
 https://home.xnaas.info {
   import main
   reverse_proxy http://192.168.1.150:5000 {
