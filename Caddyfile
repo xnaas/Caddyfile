@@ -1,6 +1,7 @@
 {
   default_sni xnaas.info
   acme_ca https://acme-v02.api.letsencrypt.org/directory
+  acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
   email {$ACMEEMAIL}
 }
 (proxyheaders) {
@@ -11,7 +12,6 @@
 }
 (main) {
   tls {
-    dns cloudflare {env.CLOUDFLARE_API_TOKEN}
     client_auth {
       mode require_and_verify
       trusted_ca_cert_file /data/origin-pull-ca.pem
@@ -66,6 +66,9 @@ https://xnaas.info {
   handle_path /pgp* {
     redir https://github.com/xnaas/pgp 302
   }
+}
+http://192.168.1.101 {
+  
 }
 https://home.xnaas.info {
   import main
