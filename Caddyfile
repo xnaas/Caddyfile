@@ -150,7 +150,8 @@ https://teslag.xnaas.info {
     import proxyheaders
   }
 }
-https://www.xnaas.info {
+https://www.xnaas.info,
+https://www.actionsack.com {
   import main
   redir https://dropwww.com/why permanent
 }
@@ -218,10 +219,6 @@ https://nitter.actionsack.com {
   reverse_proxy nitter:8080 {
     import proxyheaders
   }
-}
-https://www.actionsack.com {
-  import main
-  redir https://dropwww.com/why permanent
 }
 https://ytdl.actionsack.com {
   import main
