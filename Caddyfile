@@ -126,7 +126,8 @@ https://rss.xnaas.info {
     import proxyheaders
   }
 }
-https://rssb.xnaas.info {
+https://rssb.xnaas.info,
+https://rss.actionsack.com {
   import main
   import asak
   reverse_proxy rss-bridge:80 {
