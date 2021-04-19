@@ -54,7 +54,7 @@ This sets the email for ACME challenges to the `$ACMEEMAIL` environment variable
   }
   log {
     output file /data/logs/access.log {
-      roll_size 10MiB
+      roll_size 100MiB
       roll_keep 10
       roll_keep_for 168h
     }
